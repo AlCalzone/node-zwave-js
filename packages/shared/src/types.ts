@@ -8,3 +8,12 @@ export type DeepPartial<T> = { [P in keyof T]+?: DeepPartial<T[P]> };
 export type JSONObject = Record<string, any>;
 
 export type Constructor = new (...args: any[]) => any;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type TypedClassDecorator<TTarget extends Object> = <
+	// wotan-disable-next-line no-misused-generics
+	T extends TTarget,
+	TConstructor extends new (...args: any[]) => T
+>(
+	apiClass: TConstructor,
+) => TConstructor | void;

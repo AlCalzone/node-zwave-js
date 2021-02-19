@@ -19,6 +19,8 @@ import {
 	gotDeserializationOptions,
 	implementedVersion,
 } from "./CommandClass";
+import { Security2Extension } from "./Security2/Extension";
+import { ECDHProfiles, KEXFailType, KEXSchemes } from "./Security2/shared";
 
 // All the supported commands
 export enum Security2Command {
@@ -36,26 +38,6 @@ export enum Security2Command {
 	TransferEnd = 0x0c,
 	CommandsSupportedGet = 0x0d,
 	CommandsSupportedReport = 0x0e,
-}
-
-export enum KEXSchemes {
-	KEXScheme1 = 1,
-}
-
-export enum ECDHProfiles {
-	Curve25519 = 0,
-}
-
-export enum KEXFailType {
-	NoKeyMatch = 0x01, // KEX_KEY
-	NoSupportedScheme = 0x02, // KEX_SCHEME
-	NoSupportedCurve = 0x03, // KEX_CURVES
-	Decrypt = 0x05,
-	BootstrappingCanceled = 0x06, // CANCEL
-	WrongSecurityLevel = 0x07, // AUTH
-	KeyNotGranted = 0x08, // GET
-	NoVerify = 0x09, // VERIFY
-	DifferentKey = 0x0a, // REPORT
 }
 
 function securityClassToBitMask(key: SecurityClasses): Buffer {
@@ -82,6 +64,112 @@ function bitMaskToSecurityClass(
 @implementedVersion(1)
 export class Security2CC extends CommandClass {
 	declare ccCommand: Security2Command;
+}
+
+interface Security2CCMessageEncapsulationOptions extends CCCommandOptions {
+	sequenceNumber: number;
+	extensions?: Security2Extension[];
+	encapsulated: CommandClass;
+}
+
+function getCCResponseForMessageEncapsulation(
+	sent: Security2CCMessageEncapsulation,
+) {
+	if (sent.encapsulated.expectsCCResponse()) {
+		return Security2CCMessageEncapsulation;
+	}
+}
+
+@CCCommand(Security2Command.MessageEncapsulation)
+@expectedCCResponse(
+	getCCResponseForMessageEncapsulation,
+	() => "checkEncapsulated",
+)
+export class Security2CCMessageEncapsulation extends Security2CC {
+	public constructor(
+		driver: Driver,
+		options:
+			| CommandClassDeserializationOptions
+			| Security2CCMessageEncapsulationOptions,
+	) {
+		super(driver, options);
+		if (gotDeserializationOptions(options)) {
+			validatePayload(this.payload.length >= 2);
+			this.sequenceNumber = this.payload[0];
+			const hasExtensions = !!(this.payload[1] & 0b1);
+			const hasEncryptedExtensions = !!(this.payload[1] & 0b10);
+
+			let offset = 2;
+			this.extensions = [];
+			const parseExtensions = (buffer: Buffer) => {
+				while (true) {
+					// we need to read at least the length byte
+					validatePayload(buffer.length >= offset + 1);
+					const extensionLength = Security2Extension.getExtensionLength(
+						buffer.slice(offset),
+					);
+					// Parse the extension
+					const ext = Security2Extension.from(
+						buffer.slice(offset, offset + extensionLength),
+					);
+					this.extensions.push(ext);
+					offset += extensionLength;
+					// Check if that was the last extension
+					if (!ext.moreToFollow) break;
+				}
+			};
+			if (hasExtensions) parseExtensions(this.payload);
+
+			const ciphertext = this.payload.slice(offset);
+			// TODO: decrypt
+			const plaintext: Buffer = undefined as any;
+			offset = 0;
+			if (hasEncryptedExtensions) parseExtensions(plaintext);
+			// TODO: authenticate, deserialize CC
+		} else {
+			this.encapsulated = options.encapsulated;
+			options.encapsulated.encapsulatingCC = this as any;
+
+			this.sequenceNumber = options.sequenceNumber;
+			this.extensions = options.extensions ?? [];
+		}
+	}
+
+	public sequenceNumber: number;
+	public encapsulated!: CommandClass;
+	public extensions: Security2Extension[];
+
+	public serialize(): Buffer {
+		const unencryptedExtensions = this.extensions.filter(
+			(e) => !e.isEncrypted(),
+		);
+		const encryptedExtensions = this.extensions.filter((e) =>
+			e.isEncrypted(),
+		);
+
+		const unencryptedPayload = Buffer.concat([
+			Buffer.from([
+				this.sequenceNumber,
+				(encryptedExtensions.length ? 0b10 : 0) |
+					(unencryptedExtensions.length ? 1 : 0),
+			]),
+			...unencryptedExtensions.map((e, index) =>
+				e.serialize(index < unencryptedExtensions.length - 1),
+			),
+		]);
+		const plaintextPayload = Buffer.concat([
+			...encryptedExtensions.map((e, index) =>
+				e.serialize(index < encryptedExtensions.length - 1),
+			),
+			this.encapsulated.serialize(),
+			/* TODO: CCM control data, */
+			/* TODO: CCM auth tag */
+		]);
+		const ciphertextPayload = (undefined as any) as Buffer; // TODO: encrypt
+
+		this.payload = Buffer.concat([unencryptedPayload, ciphertextPayload]);
+		return super.serialize();
+	}
 }
 
 type Security2CCNonceReportOptions = CCCommandOptions & {

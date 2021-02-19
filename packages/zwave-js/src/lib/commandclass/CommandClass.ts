@@ -23,6 +23,7 @@ import {
 	JSONObject,
 	num2hex,
 	staticExtends,
+	TypedClassDecorator,
 } from "@zwave-js/shared";
 import { isArray } from "alcalzone-shared/typeguards";
 import type { Driver } from "../driver/Driver";
@@ -978,15 +979,6 @@ type APIConstructor = new (
 	endpoint: Endpoint | VirtualEndpoint,
 ) => CCAPI;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type TypedClassDecorator<TTarget extends Object> = <
-	// wotan-disable-next-line no-misused-generics
-	T extends TTarget,
-	TConstructor extends new (...args: any[]) => T
->(
-	apiClass: TConstructor,
-) => TConstructor | void;
-
 type CommandClassMap = Map<CommandClasses, Constructable<CommandClass>>;
 type CCCommandMap = Map<string, Constructable<CommandClass>>;
 type APIMap = Map<CommandClasses, APIConstructor>;
@@ -1026,11 +1018,11 @@ export function commandClass(
 	return (messageClass) => {
 		Reflect.defineMetadata(METADATA_commandClass, cc, messageClass);
 
-		// also store a map in the Message metadata for lookup.
+		// also store a map in the CommandClass metadata for lookup.
 		const map: CommandClassMap =
 			Reflect.getMetadata(METADATA_commandClassMap, CommandClass) ||
 			new Map();
-		map.set(cc, (messageClass as any) as Constructable<CommandClass>);
+		map.set(cc, (messageClass as unknown) as Constructable<CommandClass>);
 		Reflect.defineMetadata(METADATA_commandClassMap, map, CommandClass);
 	};
 }
@@ -1396,7 +1388,7 @@ export function API(cc: CommandClasses): TypedClassDecorator<CCAPI> {
 		// also store a map in the CCAPI metadata for lookup.
 		const map = (Reflect.getMetadata(METADATA_APIMap, CCAPI) ||
 			new Map()) as APIMap;
-		map.set(cc, (apiClass as any) as APIConstructor);
+		map.set(cc, (apiClass as unknown) as APIConstructor);
 		Reflect.defineMetadata(METADATA_APIMap, map, CCAPI);
 	};
 }

@@ -143,7 +143,7 @@ describe("lib/commandclass/CommandClass => ", () => {
 	describe("expectMoreMessages()", () => {
 		it("returns false by default", () => {
 			const cc = new DummyCC(fakeDriver, { nodeId: 1 });
-			expect(cc.expectMoreMessages()).toBeFalse();
+			expect(cc.expectMoreMessages([])).toBeFalse();
 		});
 	});
 

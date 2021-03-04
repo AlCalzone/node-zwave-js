@@ -95,7 +95,10 @@ export class CommandClass {
 
 		if (gotDeserializationOptions(options)) {
 			// For deserialized commands, try to invoke the correct subclass constructor
-			const ccCommand = CommandClass.getCCCommand(options.data);
+			const CCConstructor =
+				getCCConstructor(CommandClass.getCommandClass(options.data)) ??
+				CommandClass;
+			const ccCommand = CCConstructor.getCCCommand(options.data);
 			if (ccCommand != undefined) {
 				const CommandConstructor = getCCCommandConstructor(
 					this.ccId,
@@ -245,7 +248,8 @@ export class CommandClass {
 	/**
 	 * Deserializes a CC from a buffer that contains a serialized CC
 	 */
-	private deserialize(data: Buffer) {
+	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	protected deserialize(data: Buffer) {
 		const ccId = CommandClass.getCommandClass(data);
 		const ccIdLength = this.isExtended() ? 2 : 1;
 		if (data.length > ccIdLength) {
@@ -780,8 +784,12 @@ export class CommandClass {
 		return undefined; // Only select CCs support to be split
 	}
 
-	/** When a CC supports to be split into multiple partial CCs, this indicates that the last report hasn't been received yet */
-	public expectMoreMessages(): boolean {
+	/**
+	 * When a CC supports to be split into multiple partial CCs, this indicates that the last report hasn't been received yet.
+	 * @param session The previously received set of messages received in this partial CC session
+	 */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	public expectMoreMessages(session: CommandClass[]): boolean {
 		return false; // By default, all CCs are monolithic
 	}
 

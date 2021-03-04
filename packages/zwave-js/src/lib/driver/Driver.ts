@@ -1598,7 +1598,7 @@ It is probably asleep, moving its messages to the wakeup queue.`,
 					this.partialCCSessions.set(partialSessionKey, []);
 				}
 				const session = this.partialCCSessions.get(partialSessionKey)!;
-				if (command.expectMoreMessages()) {
+				if (command.expectMoreMessages(session)) {
 					// this is not the final one, store it
 					session.push(command);
 					// and don't handle the command now

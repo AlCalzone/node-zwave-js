@@ -703,7 +703,7 @@ export class SecurityCCCommandEncapsulation extends SecurityCC {
 	}
 
 	protected computeEncapsulationOverhead(): number {
-		// Supervision CC adds 8 bytes IV, 1 byte frame control, 1 byte nonce ID, 8 bytes MAC
+		// Security CC adds 8 bytes IV, 1 byte frame control, 1 byte nonce ID, 8 bytes MAC
 		return super.computeEncapsulationOverhead() + 18;
 	}
 

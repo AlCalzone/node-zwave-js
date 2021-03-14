@@ -319,6 +319,7 @@ export interface CCAPIs {
 	"No Operation": import("./NoOperationCC").NoOperationCCAPI;
 	"Node Naming and Location": import("./NodeNamingCC").NodeNamingAndLocationCCAPI;
 	Notification: import("./NotificationCC").NotificationCCAPI;
+	Powerlevel: import("./PowerlevelCC").PowerlevelCCAPI;
 	Protection: import("./ProtectionCC").ProtectionCCAPI;
 	"Scene Activation": import("./SceneActivationCC").SceneActivationCCAPI;
 	"Scene Actuator Configuration": import("./SceneActuatorConfigurationCC").SceneActuatorConfigurationCCAPI;

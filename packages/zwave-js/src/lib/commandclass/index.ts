@@ -53,6 +53,7 @@ export type {
 export { LevelChangeDirection, SwitchType } from "./MultilevelSwitchCC";
 export type { MultilevelSwitchLevelChangeMetadata } from "./MultilevelSwitchCC";
 export type { NotificationMetadata } from "./NotificationCC";
+export { Powerlevel } from "./PowerlevelCC";
 export { LocalProtectionState, RFProtectionState } from "./ProtectionCC";
 export { ToneId } from "./SoundSwitchCC";
 export { SupervisionStatus } from "./SupervisionCC";

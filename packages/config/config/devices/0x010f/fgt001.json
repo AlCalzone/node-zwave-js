@@ -36,7 +36,7 @@
 			"description": "This parameter allows to enable different additional functions of the device.",
 			"valueSize": 4,
 			"minValue": 0,
-			"maxValue": 31,
+			"maxValue": 1023,
 			"defaultValue": 1,
 			"allowManualEntry": true
 		},
@@ -45,7 +45,7 @@
 			"description": "This parameter allows to check statuses of different additional functions.",
 			"valueSize": 4,
 			"minValue": 0,
-			"maxValue": 3,
+			"maxValue": 15,
 			"defaultValue": 0,
 			"readOnly": true,
 			"allowManualEntry": true

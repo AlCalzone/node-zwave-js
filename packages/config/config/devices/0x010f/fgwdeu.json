@@ -21,16 +21,6 @@
 	},
 	"supportsZWavePlus": true,
 	"paramInformation": {
-		"0": {
-			"label": "ON/OFF mode",
-			"valueSize": 1,
-			"minValue": 0,
-			"maxValue": 2,
-			"defaultValue": 2,
-			"readOnly": false,
-			"writeOnly": false,
-			"allowManualEntry": true
-		},
 		"1": {
 			"label": "Remember device state",
 			"description": "Determines how the device will react in the event of power supply failure",
@@ -272,45 +262,23 @@
 		},
 		"40": {
 			"label": "First button – scenes sent",
-			"description": "determines which actions result in sending scene IDs",
+			"description": "determines which actions result in sending scene IDs (0 - no scenes; 1 - Key pressed once; 2 - Key pressed twice; 4 - Key pressed 3 times; 8 - Key held down and released)",
 			"valueSize": 1,
 			"minValue": 0,
 			"maxValue": 15,
 			"defaultValue": 0,
-			"readOnly": true,
+			"readOnly": false,
 			"writeOnly": false,
-			"allowManualEntry": false,
-			"options": [
-				{
-					"label": "no scenes",
-					"value": 0
-				},
-				{
-					"label": "Key pressed once",
-					"value": 1
-				},
-				{
-					"label": "Key pressed twice",
-					"value": 2
-				},
-				{
-					"label": "Key pressed 3 times",
-					"value": 4
-				},
-				{
-					"label": "Key held down and released",
-					"value": 8
-				}
-			]
+			"allowManualEntry": true
 		},
 		"41": {
 			"label": "Second button – scenes sent",
-			"description": "determines which actions result in sending scene IDs",
+			"description": "determines which actions result in sending scene IDs (0 - no scenes; 1 - Key pressed once; 2 - Key pressed twice; 4 - Key pressed 3 times; 8 - Key held down and released)",
 			"valueSize": 1,
 			"minValue": 0,
 			"maxValue": 15,
 			"defaultValue": 0,
-			"readOnly": true,
+			"readOnly": false,
 			"writeOnly": false,
 			"allowManualEntry": true
 		},
@@ -565,6 +533,30 @@
 			"readOnly": true,
 			"writeOnly": false,
 			"allowManualEntry": true
+		},
+		"172": {
+			"label": "ON/OFF mode",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 2,
+			"defaultValue": 2,
+			"readOnly": false,
+			"writeOnly": false,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "ON/OFF mode disabled (dimming is possible)",
+					"value": 0
+				},
+				{
+					"label": "ON/OFF mode enabled (dimming is not possible)",
+					"value": 1
+				},
+				{
+					"label": "mode selected automatically",
+					"value": 2
+				}
+			]
 		},
 		"173": {
 			"label": "Dimmability of the load (read only)",

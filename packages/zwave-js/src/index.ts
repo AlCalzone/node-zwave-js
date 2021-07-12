@@ -1,16 +1,21 @@
-// This module is the main entry point. Requiring reflect-metadata here avoids forgetting it
-require("reflect-metadata");
+// organize-imports-ignore
 
-import * as path from "path";
+// This module is the main entry point. Requiring reflect-metadata here avoids forgetting it
+import "reflect-metadata";
+
 // By installing source map support, we get the original source
 // locations in error messages
-import "source-map-support/register";
-import { initSentry } from "./lib/telemetry/sentry";
+import { install as installSourceMapSupport } from "source-map-support";
+installSourceMapSupport();
+
+import * as path from "path";
+import { initSentry } from "./lib/telemetry/sentry.js";
 
 /** The version of zwave-js, exported for your convenience */
+const packageJsonPath = require.resolve("zwave-js/package.json");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJson = require("zwave-js/package.json");
-const libraryRootDir = path.join(__dirname, "..");
+const packageJson = require(packageJsonPath);
+const libraryRootDir = path.dirname(packageJsonPath);
 const libName: string = packageJson.name;
 const libVersion: string = packageJson.version;
 

@@ -138,41 +138,19 @@ jobs:
     - name: Compile TypeScript code
       run: yarn run build
 
+    # Test that the generated packages are ok
+    - if: matrix.node-version == '10.x'
+      name: Import main entry point (CommonJS)
+      run: yarn node -e 'require("zwave-js")'
+
+    - if: matrix.node-version != '10.x'
+      name: Import main entry point (ESM)
+      run: yarn node --input-type=module --es-module-specifier-resolution=node -e 'import "zwave-js"'
+
     - name: Run component tests
       run: yarn run test:ci
       env:
         CI: true
-
-  # ===================
-
-  # Test that the generated packages are ok
-  test-package:
-    if: contains(github.event.head_commit.message, '[skip ci]') == false
-
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x] # This should be LTS
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-
-    - name: Install dependencies
-      run: yarn install --immutable
-
-    # Do a full build so the package files are regenerated
-    - name: Compile TypeScript code
-      run: yarn run build:full
-
-    - name: Import main entry point
-      run: yarn node -e 'require("./packages/zwave-js")'
 
   # ===================
 
@@ -227,7 +205,7 @@ jobs:
       github.event_name == 'push' &&
       startsWith(github.ref, 'refs/tags/v')
 
-    needs: [lint, lint-zwave, unit-tests, test-package]
+    needs: [lint, lint-zwave, unit-tests]
 
     runs-on: ubuntu-latest
     strategy:
@@ -264,7 +242,7 @@ jobs:
       run: yarn install --immutable
 
     - name: Create a clean build
-      run: yarn run build:full
+      run: yarn run build
 
     - name: Publish packages to npm
       env:

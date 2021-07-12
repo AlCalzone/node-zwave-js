@@ -13,7 +13,7 @@ If you need to test changes from GitHub, e.g. a branch that fixes an issue you h
 1. Install dependencies, compile the sources
     ```bash
     yarn
-    yarn run build:full
+    yarn run build
     ```
 1. Link the `zwave-js` packages into your repo:
     1. If your repo is using `yarn v2`, execute this in your repo:

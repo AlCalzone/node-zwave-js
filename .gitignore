@@ -16,7 +16,7 @@ node_modules/
 /.nyc_output
 coverage/
 
-# npm packet files
+# npm package files
 zwave-js-*.tgz
 
 # ZWave cache

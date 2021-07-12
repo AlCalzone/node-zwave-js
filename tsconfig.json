@@ -1,4 +1,5 @@
 {
+	"extends": "@tsconfig/node12/tsconfig.json",
 	"compilerOptions": {
 		"plugins": [
 			{
@@ -9,14 +10,15 @@
 		"composite": true,
 		"declaration": true,
 		"declarationMap": true,
+
+		// For ES modules
+		"module": "ES2020",
+		// "target": "ES2020",
+		"moduleResolution": "node",
 		// To enable Babel support
 		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": true,
-		"module": "commonjs",
-		"moduleResolution": "node",
+
 		"noEmitOnError": true,
-		"noImplicitAny": true,
-		"noImplicitThis": true,
 		"removeComments": false,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": false,
@@ -24,12 +26,7 @@
 		"sourceMap": true,
 		"inlineSourceMap": false,
 		"stripInternal": true,
-		"target": "es2018",
-		"skipLibCheck": true,
-		"strictNullChecks": true,
-		"strictPropertyInitialization": true,
-		"strictBindCallApply": true,
-		"strictFunctionTypes": true,
+
 		"watch": false, // true breaks CI scripts
 		"pretty": true,
 		"types": ["node", "jest", "jest-extended"],

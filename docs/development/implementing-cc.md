@@ -28,7 +28,7 @@ Make sure you have the [project snippets](https://marketplace.visualstudio.com/i
     - CCs that can set values for a given value ID must have a `SET_VALUE` API. There is no snippet for that yet, best check other CCs how they use it.
     - CCs that can poll values for a given value ID must have a `POLL_VALUE` API. There is no snippet for that yet, best check other CCs how they use it.
 
-    > [!NOTE] At this point, you'll likely notice that the API class is not yet available through `node.commandClasses`. To fix that, you need to build the project once using `yarn run build:full`.
+    > [!NOTE] At this point, you'll likely notice that the API class is not yet available through `node.commandClasses`. To fix that, you need to build the project once using `yarn run build`.
 
 1. Implement the interview procedure in the base class. This is defined for many CCs in the `SDS14223` document. The `zwccinterview` snippet generates some boilerplate for that, `zwccintreq` can be used to define which CCs must be interviewed before the current one.  
    Two things to keep in mind:

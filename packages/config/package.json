@@ -6,8 +6,16 @@
     "access": "public"
   },
   "keywords": [],
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js",
+      "require": "./build/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "build/esm/index.d.ts",
   "files": [
     "build/**/*.{js,d.ts,map}",
     "config/"
@@ -32,13 +40,16 @@
     "node": ">=v12.22.2"
   },
   "scripts": {
-    "build": "yarn ts maintenance/prebuild.ts && tsc -b tsconfig.build.json",
+    "prebuild": "yarn ts maintenance/prebuild.ts",
+    "build": "yarn prebuild && tsc -b tsconfig.build.json && yarn postbuild",
+    "postbuild": "yarn esm2cjs --in=build/esm --out=build/cjs -l error",
     "clean": "tsc -b tsconfig.build.json --clean",
     "watch": "yarn run build --watch --pretty",
     "lint_config": "yarn ts maintenance/lintConfigFiles.ts",
     "ts": "node -r esbuild-register"
   },
   "dependencies": {
+    "@alcalzone/esm2cjs": "^1.1.0",
     "@zwave-js/core": "8.0.0-alpha.0",
     "@zwave-js/shared": "8.0.0-alpha.0",
     "alcalzone-shared": "^4.0.0",

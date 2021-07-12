@@ -6,8 +6,16 @@
     "access": "public"
   },
   "keywords": [],
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js",
+      "require": "./build/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "build/esm/index.d.ts",
   "files": [
     "build/**/*.{js,d.ts,map}"
   ],
@@ -31,7 +39,8 @@
     "node": ">=v12.22.2"
   },
   "scripts": {
-    "build": "tsc -b tsconfig.build.json",
+    "build": "tsc -b tsconfig.build.json && yarn postbuild",
+    "postbuild": "yarn esm2cjs --in=build/esm --out=build/cjs -l error",
     "clean": "yarn run build --clean",
     "watch": "yarn run build --watch --pretty"
   },
@@ -44,6 +53,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@alcalzone/esm2cjs": "^1.1.0",
     "@serialport/binding-mock": "^9.0.7",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.5",

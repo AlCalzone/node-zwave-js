@@ -30,7 +30,7 @@ async function publishPr() {
 	let newVersion;
 	try {
 		// Build it
-		await exec.exec("yarn", ["run", "build:full"]);
+		await exec.exec("yarn", ["run", "build"]);
 
 		// Configure git
 		await exec.exec("git", ["config", "user.email", "bot@zwave-js.io"]);

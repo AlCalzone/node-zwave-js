@@ -1660,12 +1660,13 @@ export class ZWaveController extends TypedEventEmitter<ControllerEventCallbacks>
 	 * Returns `true` if the process succeeded, `false` otherwise.
 	 */
 	public async healNode(nodeId: number): Promise<boolean> {
+		// Don't try to heal dead nodes
+		const node = this.nodes.getOrThrow(nodeId);
+
 		// Don't start the process twice
 		if (this._healNetworkActive) return false;
 		this._healNetworkActive = true;
 
-		// Don't try to heal dead nodes
-		const node = this.nodes.getOrThrow(nodeId);
 		if (
 			// The node is known to be dead
 			node.status === NodeStatus.Dead ||

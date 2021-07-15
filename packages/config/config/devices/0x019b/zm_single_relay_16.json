@@ -1,0 +1,209 @@
+{
+	"manufacturer": "HeatIt",
+	"manufacturerId": "0x019b",
+	"label": "4512671",
+	"description": "Heatit ZM Single Relay 16A",
+	"devices": [
+		{
+			"productType": "0x0004",
+			"productId": "0x3500",
+			"zwaveAllianceId": 4062
+		}
+	],
+	"firmwareVersion": {
+		"min": "0.0",
+		"max": "255.255"
+	},
+	"associations": {
+		"1": {
+			"label": "Lifeline",
+			"maxNodes": 5,
+			"isLifeline": true
+		},
+		"2": {
+			"label": "External Relay Control: Basic Set S1",
+			"maxNodes": 5
+		},
+		"3": {
+			"label": "External Relay Control: Start/Stop Multilevel Set S1",
+			"maxNodes": 5
+		},
+		"4": {
+			"label": "External Relay Control: Basic Set S2",
+			"maxNodes": 5
+		},
+		"5": {
+			"label": "External Relay Control: Start/Stop Multilevel Set S2",
+			"maxNodes": 5
+		}
+	},
+	"paramInformation": {
+		"1": {
+			"label": "Load Limit",
+			"valueSize": 1,
+			"unit": "A",
+			"minValue": 1,
+			"maxValue": 16,
+			"defaultValue": 16,
+			"unsigned": true
+		},
+		"2": {
+			"label": "Turn On Delay After Emergency Off",
+			"valueSize": 2,
+			"unit": "seconds",
+			"minValue": 0,
+			"maxValue": 32767,
+			"defaultValue": 20,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disable",
+					"value": 0
+				}
+			]
+		},
+		"3": {
+			"label": "Switch Type",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 1,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Momentary switch",
+					"value": 0
+				},
+				{
+					"label": "Toggle switch",
+					"value": 1
+				}
+			]
+		},
+		"4": {
+			"label": "S1/Button Operation",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 1,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Button turns on/off and sends status",
+					"value": 0
+				},
+				{
+					"label": "Button only sends status",
+					"value": 1
+				}
+			]
+		},
+		"5": {
+			"label": "Central Scene Notifications",
+			"description": "Configure which buttons cause notifications to be sent",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 3,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "S2 Only",
+					"value": 0
+				},
+				{
+					"label": "S1 Only",
+					"value": 1
+				},
+				{
+					"label": "S1 & S2",
+					"value": 2
+				},
+				{
+					"label": "None",
+					"value": 3
+				}
+			]
+		},
+		"6": {
+			"$import": "../templates/master_template.json#state_after_power_failure_off_on_prev"
+		},
+		"7": {
+			"label": "Auto-Off Delay",
+			"valueSize": 4,
+			"unit": "seconds",
+			"minValue": 0,
+			"maxValue": 86400,
+			"defaultValue": 0,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disable",
+					"value": 0
+				}
+			]
+		},
+		"8": {
+			"label": "Auto-On Delay",
+			"description": "Time to turn relay on after having been turned off",
+			"valueSize": 4,
+			"unit": "seconds",
+			"minValue": 0,
+			"maxValue": 86400,
+			"defaultValue": 0,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disable",
+					"value": 0
+				}
+			]
+		},
+		"9": {
+			"label": "Inverted Output",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 1,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Disable",
+					"value": 0
+				},
+				{
+					"label": "Enable",
+					"value": 1
+				}
+			]
+		},
+		"10": {
+			"label": "Meter Report Interval",
+			"valueSize": 2,
+			"unit": "seconds",
+			"minValue": 30,
+			"maxValue": 32767,
+			"defaultValue": 900,
+			"unsigned": true
+		},
+		"11": {
+			"label": "Meter Report Delta Value",
+			"valueSize": 2,
+			"unit": "W",
+			"minValue": 5,
+			"maxValue": 3600,
+			"defaultValue": 75,
+			"unsigned": true
+		}
+	},
+	"metadata": {
+		"inclusion": "The primary controller/gateway has a mode for adding devices. Please refer to your primary controller manual on how to set the primary controller in add mode. The device may only be added to the network if the primary controller is in add mode.\n\nThere are two ways to add the Heatit ZM Single Relay 16A to a Z-Wave network.\n\n*Method 1: Standard (Manual)\nAdd mode is indicated on the device by a blinking green LED. This lasts until timeout occurs after 90 seconds, or until the module has been added to the network.\nThe LED will light up for 3 seconds if adding is successful.\n\nMethod 2: SmartStart (Automatic)\nSmartStart enabled products may be added to a Z-Wave network by scanning the Z-Wave QR-Code on the product if your primary controller supports SmartStart inclusion. No further action is required and the SmartStart product will be added automatically after being powered on within range of the primary controller",
+		"exclusion": "The primary controller/gateway has a mode for removing devices. Please refer to your primary controller manual on how to set the primary controller in remove mode. The device may only be removed from the network if the primary controller is in remove mode.\n\nRemove mode is indicated on the device by a blinking green LED. This lasts until timeout occurs after 90 seconds, or until the module has been removed from the network.\nThe LED will light up for 3 seconds if removing is successful",
+		"reset": "Press and hold the configuration button. After 3 seconds the LED will start to blink in green. After 20 seconds the LED will stop blinking and emit a constant light. You may now release the button. \n\nNB! Please use this procedure only when the primary controller/ gateway is missing or otherwise inoperable",
+		"manual": "https://products.z-wavealliance.org/ProductManual/File?folder=&filename=product_documents/4062/Manual_Heatit%20ZM%20Single%20Relay%2016A_Ver%202020-A_ENG.pdf"
+	}
+}

@@ -2,7 +2,7 @@
 	"manufacturer": "Nortek Security & Control LLC",
 	"manufacturerId": "0x014f",
 	"label": "WS15Z-1",
-	"description": "Wall Mounted Switch",
+	"description": "In-wall Switch ON/OFF",
 	"devices": [
 		{
 			"productType": "0x5257",
@@ -20,21 +20,33 @@
 	"paramInformation": {
 		"3": {
 			"label": "Night Light",
-			"description": "By default, the LED will turn OFF when the lead attached is turned ON.",
+			"description": "By default, the LED will turn OFF when the load attached is turned ON.",
 			"valueSize": 1,
 			"minValue": 0,
-			"maxValue": 255,
-			"defaultValue": 1,
+			"maxValue": 4,
+			"defaultValue": 0,
 			"unsigned": true,
 			"allowManualEntry": false,
 			"options": [
 				{
-					"label": "On when load is on",
+					"label": "OFF when load is on",
 					"value": 0
 				},
 				{
-					"label": "Off when load is on",
+					"label": "ON when load is on",
 					"value": 1
+				},
+				{
+					"label": "LED Always ON",
+					"value": 2
+				},
+				{
+					"label": "LED Always OFF",
+					"value": 3
+				},
+				{
+					"label": "LED Blinks during transmission",
+					"value": 4
 				}
 			]
 		},
@@ -43,7 +55,7 @@
 			"description": "To change the top of the switch to OFF and the bottom of the switch ON.",
 			"valueSize": 1,
 			"minValue": 0,
-			"maxValue": 255,
+			"maxValue": 1,
 			"defaultValue": 0,
 			"unsigned": true,
 			"allowManualEntry": false,
@@ -58,5 +70,10 @@
 				}
 			]
 		}
+	},
+	"metadata": {
+		"inclusion": "With the controller in inclusion mode, press the top of the switch two times.",
+		"exclusion": "With the controller in exclusion mode, press the top of the switch two times.",
+		"manual": "https://www.nortekcontrol.com/wp-content/uploads/WS15Z1_manual.pdf"
 	}
 }

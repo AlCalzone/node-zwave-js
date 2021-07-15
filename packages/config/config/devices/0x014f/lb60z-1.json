@@ -13,27 +13,55 @@
 		"min": "0.0",
 		"max": "255.255"
 	},
+	"associations": {
+		"1": {
+			"label": "Lifeline",
+			"maxNodes": 5,
+			"isLifeline": true
+		}
+	},
 	"supportsZWavePlus": true,
 	"paramInformation": {
 		"1": {
 			"label": "Dim Level Memory",
-			"description": "Dim Settings",
+			"description": "Bulb brightness when turned on",
 			"valueSize": 1,
 			"minValue": 0,
-			"maxValue": 255,
+			"maxValue": 1,
 			"defaultValue": 0,
 			"unsigned": true,
 			"allowManualEntry": false,
 			"options": [
 				{
-					"label": "Disable dim level memory",
+					"label": "Full Brightness",
 					"value": 0
 				},
 				{
-					"label": "Enable dim level memory",
+					"label": "Memory Brightness",
 					"value": 1
 				}
 			]
+		},
+		"9": {
+			"label": "Dim/Bright Step Level",
+			"valueSize": 1,
+			"minValue": 1,
+			"maxValue": 99,
+			"defaultValue": 1,
+			"unsigned": true
+		},
+		"10": {
+			"label": "Dim/Bright Speed",
+			"valueSize": 1,
+			"minValue": 1,
+			"maxValue": 10,
+			"defaultValue": 3,
+			"unsigned": true
 		}
+	},
+	"metadata": {
+		"inclusion": "With the controller in inclusion mode, turn the power to the light bulb socket ON.",
+		"exclusion": "Reset the bulb by using the wall switch to turn the power to the bulb ON while the controller is in exclusion mode. The Smart LED Light Bulb will flash twice to confirm the removal.",
+		"manual": "https://www.gocontrol.com/manuals/LB60Z-1-Install.pdf"
 	}
 }

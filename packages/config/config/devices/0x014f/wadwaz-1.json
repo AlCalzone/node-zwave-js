@@ -15,12 +15,17 @@
 	},
 	"associations": {
 		"1": {
-			"label": "Controller Updates",
+			"label": "Lifeline",
 			"maxNodes": 5,
 			"isLifeline": true
 		}
 	},
 	"compat": {
 		"enableBasicSetMapping": true
+	},
+	"metadata": {
+		"inclusion": "With your Controller in Inclusion mode, depress the internal program switch for 1 second then release.",
+		"exclusion": "With your Controller in Exclusion mode, depress the internal program switch for 1 second then release.",
+		"manual": "https://www.gocontrol.com/manuals/WADWAZ-1-Install.pdf"
 	}
 }

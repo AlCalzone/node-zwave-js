@@ -2,7 +2,7 @@
 	"manufacturer": "Nortek Security & Control LLC",
 	"manufacturerId": "0x014f",
 	"label": "WO15Z",
-	"description": "Single Wall Outlet",
+	"description": "In-Wall Single Outlet",
 	"devices": [
 		{
 			"productType": "0x5252",
@@ -15,11 +15,11 @@
 	},
 	"paramInformation": {
 		"3": {
-			"label": "Night Light",
+			"label": "Status LED",
 			"description": "LED mode for attached load",
 			"valueSize": 1,
 			"minValue": 0,
-			"maxValue": 255,
+			"maxValue": 1,
 			"defaultValue": 0,
 			"unsigned": true,
 			"allowManualEntry": false,
@@ -37,5 +37,10 @@
 	},
 	"compat": {
 		"treatBasicSetAsEvent": true
+	},
+	"metadata": {
+		"inclusion": "Put the controller in to INCLUDE mode. Press the button on the unit once.",
+		"exclusion": "Put the controller in to EXCLUDE mode. Press the button on the unit twice.",
+		"manual": "https://www.gocontrol.com/manuals/WO15Z-1-Install.pdf"
 	}
 }

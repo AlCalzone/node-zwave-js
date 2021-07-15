@@ -55,7 +55,7 @@ jobs:
       run: |
         # Run all lint commands and abort if one has unfixable errors
         yarn run lint:ts --fix
-        yarn run lint:wotan --fix
+        # yarn run lint:wotan --fix
         yarn run lint:configjson -w
 
         git diff --name-only || true

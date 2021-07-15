@@ -38,8 +38,7 @@
     "build_full": "yarn run deprecated && yarn run build",
     "build": "yarn b prebuild && tsc -b tsconfig.build.json",
     "clean": "tsc -b tsconfig.build.json --clean",
-    "prewatch": "yarn b prebuild",
-    "watch": "yarn prewatch && tsc -b tsconfig.build.json --watch --pretty",
+    "watch": "yarn b prebuild && tsc -b tsconfig.build.json --watch --pretty",
     "lint_zwave": "yarn b lint",
     "ts": "node -r esbuild-register"
   },
@@ -79,6 +78,6 @@
     "esbuild-register": "^2.6.0",
     "jest-extended": "^0.11.5",
     "mockdate": "^3.0.5",
-    "typescript": "^4.3.5"
+    "typescript": "4.4.0-beta"
   }
 }

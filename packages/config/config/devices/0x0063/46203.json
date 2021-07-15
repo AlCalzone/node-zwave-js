@@ -33,28 +33,144 @@
 	},
 	"paramInformation": {
 		"3": {
-			"label": "LED Status",
+			"label": "LED Light",
+			"description": "LED status when device on or off.",
 			"valueSize": 1,
 			"minValue": 0,
-			"maxValue": 2,
-			"defaultValue": 0
+			"maxValue": 3,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "LED ON when load is OFF",
+					"value": 0
+				},
+				{
+					"label": "LED On when light is turned On",
+					"value": 1
+				},
+				{
+					"label": "LED always Off",
+					"value": 2
+				},
+				{
+					"label": "LED always ON",
+					"value": 3
+				}
+			]
 		},
 		"4": {
-			"label": "Invert",
+			"label": "Invert Switch",
+			"description": "Switch orientation.",
 			"valueSize": 1,
 			"minValue": 0,
 			"maxValue": 1,
-			"defaultValue": 0
+			"defaultValue": 0,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Normal Orientation",
+					"value": 0
+				},
+				{
+					"label": "Invert Switch",
+					"value": 1
+				}
+			]
+		},
+		"6": {
+			"label": "Dim Up/Down Rate",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 1,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Dim quickly",
+					"value": 0
+				},
+				{
+					"label": "Dim slowly",
+					"value": 1
+				}
+			]
+		},
+		"16": {
+			"label": "Enable/Disable Switch Mode",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 1,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Disable",
+					"value": 0
+				},
+				{
+					"label": "Enable",
+					"value": 1
+				}
+			]
+		},
+		"19": {
+			"label": "Alternate Exclusion",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 1,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Press any button on the switch",
+					"value": 0
+				},
+				{
+					"label": "Press two times ON button and two times OFF button, LED will flash 5 times if exclusion succeed",
+					"value": 1
+				}
+			]
+		},
+		"30": {
+			"label": "Minimum Dim Threshold",
+			"description": "Set the minimum dimmer threshold when manually or remotely controlled",
+			"valueSize": 1,
+			"minValue": 1,
+			"maxValue": 99,
+			"defaultValue": 1,
+			"unsigned": true
+		},
+		"31": {
+			"label": "Maximum Brightness Threshold",
+			"description": "Set the maximum brightness threshold when manually or remotely controlled",
+			"valueSize": 1,
+			"minValue": 1,
+			"maxValue": 99,
+			"defaultValue": 99,
+			"unsigned": true
 		},
 		"32": {
 			"label": "Default Brightness Level",
+			"description": "Set the default brightness level that the dimmer will turn on when being turned on manually",
 			"valueSize": 1,
 			"minValue": 0,
 			"maxValue": 99,
-			"defaultValue": 0
+			"defaultValue": 0,
+			"unsigned": true
 		}
 	},
 	"compat": {
 		"treatBasicSetAsEvent": true
+	},
+	"metadata": {
+		"inclusion": "1. Follow the instructions for your Z-Wave certified controller to add a device to the Z-Wave network.\n2. Once the controller is ready to add your device, press and release the top or bottom of the wireless smart dimmer (rocker) to add it in the network.\nIf prompted by the controller to enter the S2 security code, refer to the QR code/security number on the back of the box, or the QR code label on the product",
+		"exclusion": "1. Follow the instructions for your Z-Wave certified controller to remove a device from the Z-Wave network.\n2. Once the controller is ready to remove your device, press and release the top or bottom of the wireless smart dimmer (rocker) to remove it from the network",
+		"reset": "Quickly press ON (top) button 3 times, then, immediately press the OFF (bottom) button 3 times. The LED will flash 5 times when completed successfully.\nNote: This should only be used in the event your network’s primary controller is missing or otherwise inoperable",
+		"manual": "https://products.z-wavealliance.org/ProductManual/File?folder=&filename=product_documents/4024/46203%20QSG%20v3%20(3).pdf"
 	}
 }

@@ -1,0 +1,177 @@
+{
+	"manufacturer": "Minoston",
+	"manufacturerId": "0x0312",
+	"label": "MP21ZD",
+	"description": "Smart Plug Dimmer",
+	"devices": [
+		{
+			"productType": "0xff00",
+			"productId": "0xff0d"
+		}
+	],
+	"firmwareVersion": {
+		"min": "0.0",
+		"max": "255.255"
+	},
+	"paramInformation": {
+		"2": {
+			"label": "Status LED Configuration",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 3,
+			"defaultValue": 0,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "LED on when load off, LED off when load on",
+					"value": 0
+				},
+				{
+					"label": "LED on when load on, LED off when load off",
+					"value": 1
+				},
+				{
+					"label": "LED always off",
+					"value": 2
+				},
+				{
+					"label": "LED always on",
+					"value": 3
+				}
+			]
+		},
+		"4": {
+			"label": "Auto-Off Timer",
+			"valueSize": 4,
+			"unit": "minutes",
+			"minValue": 0,
+			"maxValue": 65535,
+			"defaultValue": 0,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disabled",
+					"value": 0
+				}
+			]
+		},
+		"6": {
+			"label": "Auto-On Timer",
+			"valueSize": 4,
+			"unit": "minutes",
+			"minValue": 0,
+			"maxValue": 65535,
+			"defaultValue": 0,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disabled",
+					"value": 0
+				}
+			]
+		},
+		"7": {
+			"label": "Night Light Brightness",
+			"valueSize": 1,
+			"unit": "10%",
+			"minValue": 1,
+			"maxValue": 10,
+			"defaultValue": 2,
+			"unsigned": true
+		},
+		"8": {
+			"label": "State After Power Failure",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 2,
+			"defaultValue": 2,
+			"unsigned": true,
+			"allowManualEntry": false,
+			"options": [
+				{
+					"label": "Off",
+					"value": 0
+				},
+				{
+					"label": "On",
+					"value": 1
+				},
+				{
+					"label": "Last state",
+					"value": 2
+				}
+			]
+		},
+		"9": {
+			"label": "Dimmer Ramp Rate (On/Off)",
+			"valueSize": 1,
+			"unit": "seconds",
+			"minValue": 1,
+			"maxValue": 10,
+			"defaultValue": 1,
+			"unsigned": true
+		},
+		"10": {
+			"label": "Dimmer Ramp Rate (Change Brightness)",
+			"valueSize": 1,
+			"unit": "seconds",
+			"minValue": 1,
+			"maxValue": 10,
+			"defaultValue": 4,
+			"unsigned": true
+		},
+		"11": {
+			"label": "Minimum Brightness",
+			"valueSize": 1,
+			"unit": "%",
+			"minValue": 0,
+			"maxValue": 99,
+			"defaultValue": 0,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disabled",
+					"value": 0
+				}
+			]
+		},
+		"12": {
+			"label": "Maximum Brightness",
+			"valueSize": 1,
+			"minValue": 0,
+			"maxValue": 99,
+			"defaultValue": 99,
+			"unsigned": true,
+			"options": [
+				{
+					"label": "Disabled",
+					"value": 0
+				}
+			]
+		},
+		"13": {
+			"label": "Temperature Report Interval",
+			"valueSize": 1,
+			"minValue": 1,
+			"maxValue": 60,
+			"defaultValue": 1,
+			"unsigned": true
+		},
+		"14": {
+			"label": "Temperature Delta Threshold For Report",
+			"valueSize": 1,
+			"unit": "°C",
+			"minValue": 1,
+			"maxValue": 10,
+			"defaultValue": 5,
+			"unsigned": true
+		}
+	},
+	"metadata": {
+		"inclusion": "Follow the instructions for your Z-Wave certified controller to add a device to the Z-Wave network.\n Once the controller is ready to add your device, press the Manual/Program button on the smart plug 3 times quickly. The blue LED will blink quickly.",
+		"exclusion": "Follow the instructions for your Z-Wave certified controller to remove a device from the Z-Wave network.\n Once the controller is ready to remove your device, press the manual/program button on the smart plug 3 times quickly.",
+		"reset": "Click the button 2 times quickly then hold for at least 10 seconds. (Light flashes 1 time when reset successfully.)",
+		"manual": "https://minoston.com/wp-content/uploads/2021/05/MP21ZDZW39S-%E8%AF%B4%E6%98%8E%E4%B9%A6.2021.01.pdf"
+	}
+}

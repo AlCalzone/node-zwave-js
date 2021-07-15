@@ -5,7 +5,7 @@
 	"description": "2 group single color wall mounted remote",
 	"devices": [
 		{
-			"productType": "0x0003",
+			"productType": "0x0300",
 			"productId": "0xa306",
 			"zwaveAllianceId": 3783
 		}

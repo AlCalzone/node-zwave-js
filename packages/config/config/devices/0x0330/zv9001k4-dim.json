@@ -5,7 +5,7 @@
 	"description": "Z-Wave Dim Remote Control",
 	"devices": [
 		{
-			"productType": "0x0003",
+			"productType": "0x0300",
 			"productId": "0xa310"
 		}
 	],

@@ -312,6 +312,28 @@ describe("lib/values/Primitive", () => {
 				expect(encodeBitMask(values, max).length).toBe(expectedLength);
 			}
 		});
+
+		it("should respect the startValue too", () => {
+			const tests = [
+				{
+					values: [2, 4, 8],
+					max: 11,
+					startValue: 2,
+					expected: Buffer.from([0b01000101, 0]),
+				},
+				{
+					values: [0, 2, 10, 11],
+					max: 19,
+					startValue: 0,
+					expected: Buffer.from([0b101, 0b1100, 0]),
+				},
+			];
+			for (const { values, max, startValue, expected } of tests) {
+				expect(encodeBitMask(values, max, startValue)).toEqual(
+					expected,
+				);
+			}
+		});
 	});
 
 	describe("getMinIntegerSize(signed)", () => {

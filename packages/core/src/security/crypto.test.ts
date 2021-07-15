@@ -1,5 +1,6 @@
 import * as crypto from "crypto";
 import {
+	computeCMAC,
 	computeMAC,
 	decryptAES128OFB,
 	encryptAES128ECB,
@@ -113,6 +114,65 @@ describe("lib/util/crypto", () => {
 			const expected = Buffer.from("2bc20a8aa9bbb371", "hex");
 
 			expect(computeMAC(plaintext, key)).toEqual(expected);
+		});
+	});
+
+	describe("computeCMAC", () => {
+		it("should work correctly (part 1)", () => {
+			// Test vector taken from https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/AES_CMAC.pdf
+			const key = Buffer.from("2B7E151628AED2A6ABF7158809CF4F3C", "hex");
+			const plaintext = Buffer.from([]);
+			const expected = Buffer.from(
+				"BB1D6929E95937287FA37D129B756746",
+				"hex",
+			);
+
+			expect(computeCMAC(plaintext, key)).toEqual(expected);
+		});
+
+		it("should work correctly (part 2)", () => {
+			// Test vector taken from https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/AES_CMAC.pdf
+			const key = Buffer.from("2B7E151628AED2A6ABF7158809CF4F3C", "hex");
+			const plaintext = Buffer.from(
+				"6BC1BEE22E409F96E93D7E117393172A",
+				"hex",
+			);
+			const expected = Buffer.from(
+				"070A16B46B4D4144F79BDD9DD04A287C",
+				"hex",
+			);
+
+			expect(computeCMAC(plaintext, key)).toEqual(expected);
+		});
+
+		it("should work correctly (part 3)", () => {
+			// Test vector taken from https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/AES_CMAC.pdf
+			const key = Buffer.from("2B7E151628AED2A6ABF7158809CF4F3C", "hex");
+			const plaintext = Buffer.from(
+				"6BC1BEE22E409F96E93D7E117393172AAE2D8A57",
+				"hex",
+			);
+			const expected = Buffer.from(
+				"7D85449EA6EA19C823A7BF78837DFADE",
+				"hex",
+			);
+
+			expect(computeCMAC(plaintext, key)).toEqual(expected);
+		});
+
+		it("should work correctly (part 4)", () => {
+			// Test vector taken from https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/AES_CMAC.pdf
+			const key = Buffer.from("2B7E151628AED2A6ABF7158809CF4F3C", "hex");
+			const plaintext = Buffer.from(
+				"6BC1BEE22E409F96E93D7E117393172AAE2D8A571E03AC9C9EB76FAC45AF8E5130C81C46A35CE411E5FBC1191A0A52EFF69F2445DF4F9B17AD2B417BE66C3710",
+				"hex",
+			);
+			const expected = Buffer.from(
+				"51F0BEBF7E3B9D92FC49741779363CFE",
+				"hex",
+			);
+
+			expect(computeCMAC(plaintext, key)).toEqual(expected);
 		});
 	});
 });

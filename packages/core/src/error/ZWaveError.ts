@@ -120,6 +120,8 @@ export enum ZWaveErrorCodes {
 
 	/** Used to report that no nonce exists */
 	SecurityCC_NoNonce = 1400,
+	/** Used to report that the inner state required for this action was not initialized */
+	Security2CC_NotInitialized,
 
 	/** The firmware update process is already active */
 	FirmwareUpdateCC_Busy = 1500,

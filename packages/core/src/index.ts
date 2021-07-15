@@ -3,6 +3,7 @@ export * from "./capabilities/NodeInfo";
 export * from "./consts";
 export * from "./error/ZWaveError";
 export * from "./log/shared";
+export * from "./security/constants";
 export * from "./security/crypto";
 export * from "./security/Manager";
 export * from "./test/assertZWaveError";

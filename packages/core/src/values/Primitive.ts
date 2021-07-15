@@ -162,13 +162,17 @@ export function parseBitMask(mask: Buffer, startValue: number = 1): number[] {
 }
 
 /** Serializes a numeric array with a given maximum into a bit mask */
-export function encodeBitMask(values: number[], maxValue: number): Buffer {
-	const numBytes = Math.ceil(maxValue / 8);
+export function encodeBitMask(
+	values: number[],
+	maxValue: number,
+	startValue: number = 1,
+): Buffer {
+	const numBytes = Math.ceil((maxValue - startValue + 1) / 8);
 	const ret = Buffer.alloc(numBytes, 0);
-	for (let val = 1; val <= maxValue; val++) {
+	for (let val = startValue; val <= maxValue; val++) {
 		if (values.indexOf(val) === -1) continue;
-		const byteNum = (val - 1) >>> 3; // id / 8
-		const bitNum = (val - 1) % 8;
+		const byteNum = (val - startValue) >>> 3; // id / 8
+		const bitNum = (val - startValue) % 8;
 		ret[byteNum] |= 2 ** bitNum;
 	}
 	return ret;

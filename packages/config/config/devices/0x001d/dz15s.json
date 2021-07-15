@@ -2,7 +2,7 @@
 	"manufacturer": "Leviton",
 	"manufacturerId": "0x001d",
 	"label": "DZ15S",
-	"description": "Scene Capable Push On/Off",
+	"description": "Scene Capable Switch On/Off",
 	"devices": [
 		{
 			"productType": "0x3401",
@@ -38,5 +38,11 @@
 				}
 			]
 		}
+	},
+	"metadata": {
+		"inclusion": "Enter programming mode by holding down the top of the paddle for 7 seconds, the LED will blink Amber. Tap the top of the paddle one time. The LED will flash green. Upon successful addition to network, the LED will blink 3 times.",
+		"exclusion": "Enter programming mode by holding down the top of the paddle for 7 seconds, the LED will blink Amber. Tap the top of the paddle one time. The LED will flash green. Upon successful removal from network, the LED will blink 3 times.",
+		"reset": "Hold the top of the paddle down for 14 seconds. Upon successful reset, the LED with blink red/amber.",
+		"manual": "https://www.leviton.com/en/docs/DI-000-DZ15S-02A-W.pdf"
 	}
 }

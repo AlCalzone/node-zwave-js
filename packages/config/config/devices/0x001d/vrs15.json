@@ -2,7 +2,7 @@
 	"manufacturer": "Leviton",
 	"manufacturerId": "0x001d",
 	"label": "VRS15",
-	"description": "Scene Capable Push On/Off",
+	"description": "Scene Capable Switch On/Off",
 	"devices": [
 		{
 			"productType": "0x0301",
@@ -20,9 +20,13 @@
 	},
 	"associations": {
 		"1": {
-			"label": "Group 1",
+			"label": "Lifeline",
 			"maxNodes": 5,
 			"isLifeline": true
 		}
+	},
+	"metadata": {
+		"reset": "Gently press the top of the pushpad until the bottom pops out of the frame. Wait 5 seconds, and push the bottom back in and hold down until LED turns amber then flashes red.",
+		"manual": "http://communities.leviton.com/servlet/JiveServlet/previewBody/1581-102-1-2190/Ins%20VRS15-1L.pdf"
 	}
 }

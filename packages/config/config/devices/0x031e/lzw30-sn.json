@@ -343,6 +343,17 @@
 				}
 			]
 		},
+		"8": {
+			"label": "LED Strip Effect",
+			"description": "LED Strip Effect",
+			"valueSize": 4,
+			"minValue": 0,
+			"maxValue": 83823359,
+			"defaultValue": 0,
+			"readOnly": false,
+			"writeOnly": false,
+			"allowManualEntry": true
+		},
 		"8[0xff]": {
 			"label": "LED Effect Color",
 			"description": "Uses a scaled hue value (realHue / 360 * 255).",
